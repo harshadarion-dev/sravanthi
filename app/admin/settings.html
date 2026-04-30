@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <div id="sidebarContainer"></div>
+  <main class="admin-main">
+    <header class="admin-header"><div class="admin-header-left"><h1>Settings</h1><div class="admin-header-sub">Manage profile, SEO, and social links</div></div></header>
+    <div class="admin-content" style="max-width:760px">
+      <div class="tab-nav">
+        <button class="tab-btn active" data-tab="tab-profile">Profile</button>
+        <button class="tab-btn" data-tab="tab-seo">SEO</button>
+        <button class="tab-btn" data-tab="tab-social">Social Links</button>
+      </div>
+
+      <!-- Profile Tab -->
+      <div class="tab-panel active" id="tab-profile">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Profile Information</div></div>
+          <div class="card-body">
+            <div class="form-grid">
+              <div class="form-group"><label>Full Name</label><input id="setting_name" data-key="name" data-section="profile" class="form-control" placeholder="Sravanthi"></div>
+              <div class="form-group"><label>Tagline</label><input id="setting_tagline" data-key="tagline" data-section="profile" class="form-control" placeholder="Senior GCP Data Engineer"></div>
+              <div class="form-group form-full"><label>Bio</label><textarea id="setting_bio" data-key="bio" data-section="profile" class="form-control" placeholder="Short professional bio…"></textarea></div>
+              <div class="form-group"><label>Email</label><input type="email" id="setting_email" data-key="email" data-section="profile" class="form-control" placeholder="you@example.com"></div>
+              <div class="form-group"><label>Phone</label><input type="tel" id="setting_phone" data-key="phone" data-section="profile" class="form-control" placeholder="+1 (617) 863-2387"></div>
+              <div class="form-group form-full"><label>Location</label><input id="setting_location" data-key="location" data-section="profile" class="form-control" placeholder="New York, NY, USA"></div>
+            </div>
+            <button class="btn btn-primary" style="margin-top:20px" data-save-section="profile">Save Profile</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEO Tab -->
+      <div class="tab-panel" id="tab-seo">
+        <div class="card">
+          <div class="card-header"><div class="card-title">SEO Settings</div></div>
+          <div class="card-body">
+            <div style="display:flex;flex-direction:column;gap:18px">
+              <div class="form-group"><label>Site Title</label><input id="setting_site_title" data-key="site_title" data-section="seo" class="form-control" placeholder="Sravanthi — Senior GCP Data Engineer"></div>
+              <div class="form-group"><label>Meta Description</label><textarea id="setting_site_description" data-key="site_description" data-section="seo" class="form-control" placeholder="Portfolio of Sravanthi…"></textarea><div class="form-hint">Recommended: 150–160 characters</div></div>
+              <div class="form-group"><label>Keywords</label><input id="setting_keywords" data-key="keywords" data-section="seo" class="form-control" placeholder="data engineer, GCP, BigQuery, Python"><div class="form-hint">Comma-separated</div></div>
+              <div class="form-group"><label>OG Image URL</label><input id="setting_og_image" data-key="og_image" data-section="seo" class="form-control" placeholder="https://…"><div class="form-hint">Image shown when sharing link on social media (1200×630px recommended)</div></div>
+            </div>
+            <button class="btn btn-primary" style="margin-top:20px" data-save-section="seo">Save SEO Settings</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social Tab -->
+      <div class="tab-panel" id="tab-social">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Social Links</div></div>
+          <div class="card-body">
+            <div style="display:flex;flex-direction:column;gap:18px">
+              <div class="form-group"><label>LinkedIn URL</label><input id="setting_linkedin" data-key="linkedin" data-section="social" class="form-control" placeholder="https://linkedin.com/in/…"></div>
+              <div class="form-group"><label>GitHub URL</label><input id="setting_github" data-key="github" data-section="social" class="form-control" placeholder="https://github.com/…"></div>
+              <div class="form-group"><label>Twitter / X URL</label><input id="setting_twitter" data-key="twitter" data-section="social" class="form-control" placeholder="https://twitter.com/…"></div>
+              <div class="form-group"><label>Instagram URL</label><input id="setting_instagram" data-key="instagram" data-section="social" class="form-control" placeholder="https://instagram.com/…"></div>
+            </div>
+            <button class="btn btn-primary" style="margin-top:20px" data-save-section="social">Save Social Links</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script type="module" src="js/settings.js"></script>
+</body>
+</html>

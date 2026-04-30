@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sravanthi Portfolio | Design Wizard</title>
+  <meta name="description"
+    content="Portfolio of D.Nova - Creative designer specializing in UI/UX, branding, and digital experiences. 200+ projects completed.">
+  <meta name="keywords" content="portfolio, designer, UI/UX, branding, web design, creative">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sravanthi Portfolio">
+  <meta property="og:description" content="Creative designer specializing in UI/UX, branding, and digital experiences.">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "D.Nova",
+    "jobTitle": "Design Wizard",
+    "url": "https://finox.design",
+    "sameAs": []
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="index.html" class="nav-logo" aria-label="Sravanthi Home">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="2" y="2" width="24" height="24" rx="4" fill="none" stroke="currentColor" stroke-width="2"
+            transform="rotate(45 14 14)" />
+          <rect x="8" y="8" width="12" height="12" rx="2" fill="currentColor" transform="rotate(45 14 14)" />
+        </svg>
+        Sravanthi
+      </a>
+
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="experience.html">Experience</a>
+        <a href="projects.html">Projects</a>
+        <a href="resume.html">Resume</a>
+        <a href="certifications.html">Certifications</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="nav-cta">
+        <a href="resume.html" class="btn btn-primary">
+          Download Resume
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+
+      <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" role="dialog" aria-label="Mobile navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="skills.html">Skills</a>
+    <a href="experience.html">Experience</a>
+    <a href="projects.html">Projects</a>
+    <a href="resume.html">Resume</a>
+    <a href="certifications.html">Certifications</a>
+    <a href="contact.html">Contact</a>
+    <a href="resume.html" class="btn btn-primary">
+      Download Resume</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-stats reveal">
+          <div class="hero-stat">
+            <div class="hero-stat-number" data-count="6" data-prefix="+" data-suffix="">+0</div>
+            <div class="hero-stat-label">Years Experience</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-number" data-count="100" data-prefix="+" data-suffix="M">0M</div>
+            <div class="hero-stat-label">Records Processed</div>
+          </div>
+        </div>
+
+        <h1 class="hero-title reveal reveal-delay-1">Hello</h1>
+        <p class="hero-subtitle reveal reveal-delay-2" id="heroSubtitle">I'm Sravanthi, Senior Data Engineer</p>
+
+        <a href="#about" class="hero-scroll reveal reveal-delay-3">
+          <div class="hero-scroll-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M8 3V13M8 13L4 9M8 13L12 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+          <span>Scroll down</span>
+        </a>
+      </div>
+
+      <div class="hero-portrait reveal reveal-delay-2">
+        <img src="assets/images/hero.png" alt="Sravanthi - Data Engineer Portrait" loading="eager" id="heroPortrait">
+      </div>
+    </div>
+  </section>
+
+  <!-- About Me Section -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <h2 class="reveal">About Me</h2>
+          <p class="reveal reveal-delay-1">
+            GCP Data Engineer with 6+ years architecting enterprise-scale ETL/ELT pipelines and cloud data
+            infrastructure. Expert in Python, SQL, and distributed systems with proven ability to design petabyte-scale
+            ingestion systems and implement machine learning feature pipelines.
+          </p>
+        </div>
+
+        <div class="about-right">
+          <div class="about-arrow" aria-hidden="true">
+            <svg width="180" height="180" viewBox="0 0 180 180" fill="none">
+              <path d="M160 20C80 30 40 80 30 140M30 140L20 120M30 140L50 130" stroke="#9A9A9A" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            </svg>
+          </div>
+
+          <div class="about-stats">
+            <div class="about-stat-card reveal">
+              <div class="about-stat-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5" />
+                  <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5" />
+                  <path d="M10 2V4M10 16V18M2 10H4M16 10H18" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" />
+                </svg>
+              </div>
+              <div class="about-stat-number" data-count="95" data-suffix="%">0%</div>
+              <div class="about-stat-desc">Data integrity maintained across 1000+ concurrent users</div>
+            </div>
+
+            <div class="reveal reveal-delay-1">
+              <img src="assets/images/client-photo.jpg" alt="Data Architecture" class="about-client-img" loading="lazy">
+            </div>
+          </div>
+
+          <div class="about-experience">
+            <div class="about-experience-item reveal reveal-delay-2">
+              <div class="about-experience-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M8 4V8L11 10" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                  <circle cx="8" cy="8" r="6" stroke="white" stroke-width="1.5" />
+                </svg>
+              </div>
+              <p class="about-experience-text">Delivered business impact through cross-functional collaboration,
+                reducing data freshness SLA from 5 days to 24 hours.</p>
+            </div>
+            <div class="about-experience-item reveal reveal-delay-3">
+              <div class="about-experience-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M8 4V8L11 10" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                  <circle cx="8" cy="8" r="6" stroke="white" stroke-width="1.5" />
+                </svg>
+              </div>
+              <p class="about-experience-text">Automated manual ETL workflows, cutting processing time by 30% and
+                building self-service analytics that reduced query load by 80%.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section class="section" id="experience" style="padding-top: 0;">
+    <div class="container">
+      <h2 class="reveal">Explore My Career Journey</h2>
+
+      <div class="timeline" id="featuredExperience">
+        <!-- Dynamic content injected by home.js -->
+        <div class="skeleton skeleton-line" style="height:100px;margin-bottom:24px"></div>
+        <div class="skeleton skeleton-line" style="height:100px;margin-bottom:24px"></div>
+        <div class="skeleton skeleton-line" style="height:100px"></div>
+      </div>
+
+      <div class="timeline-nav reveal">
+        <a href="experience.html" class="timeline-nav-btn" aria-label="View full experience">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="section" style="padding-top: 0;">
+    <div class="cta-banner reveal">
+      <div>
+        <h3>Looking for a Data Expert?</h3>
+        <p>Let's discuss how I can optimize your data infrastructure.</p>
+      </div>
+      <a href="contact.html" class="cta-banner-btn" aria-label="Contact Me">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Selected Works Section -->
+  <section class="section" id="portfolio">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="reveal">Selected Works</h2>
+        <a href="projects.html" class="link-arrow reveal">
+          View More
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="projects-grid" id="featuredProjects">
+        <!-- Dynamic content injected by home.js -->
+        <div class="skeleton" style="height:300px;border-radius:12px"></div>
+        <div class="skeleton" style="height:300px;border-radius:12px"></div>
+        <div class="skeleton" style="height:300px;border-radius:12px"></div>
+      </div>
+    </div>
+  </section>
+</section>
+
+  <!-- Insights & Trends Section -->
+  <section class="section" id="blog" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="reveal">Core Competencies</h2>
+        <a href="skills.html" class="link-arrow reveal">
+          View All Skills
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="blog-grid">
+        <article class="blog-card reveal">
+          <div class="blog-card-image">
+            <img src="assets/images/blog-1.jpg" alt="Cloud Data Architecture" loading="lazy">
+          </div>
+          <h3 class="blog-card-title">Enterprise ETL/ELT Pipelines</h3>
+          <p class="blog-card-excerpt">Designing petabyte-scale ingestion systems using GCP BigQuery, Dataflow, and
+            Cloud Composer for reliable analytics.</p>
+        </article>
+
+        <article class="blog-card reveal reveal-delay-1">
+          <div class="blog-card-image">
+            <img src="assets/images/blog-2.jpg" alt="Machine Learning & AI" loading="lazy">
+          </div>
+          <h3 class="blog-card-title">Machine Learning & AI</h3>
+          <p class="blog-card-excerpt">Implementing machine learning feature pipelines via Vertex AI and building
+            anomaly detection systems for predictive insights.</p>
+        </article>
+
+        <article class="blog-card reveal reveal-delay-2">
+          <div class="blog-card-image">
+            <img src="assets/images/project-1.jpg" alt="Data Quality & Governance" loading="lazy">
+          </div>
+          <h3 class="blog-card-title">Data Quality & Governance</h3>
+          <p class="blog-card-excerpt">Establishing KPI governance frameworks and automated data quality validation
+            ensuring 95%+ accuracy and data integrity.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" aria-label="Sravanthi Home">
+            <svg viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <rect x="2" y="2" width="24" height="24" rx="4" fill="none" stroke="currentColor" stroke-width="2"
+                transform="rotate(45 14 14)" />
+              <rect x="8" y="8" width="12" height="12" rx="2" fill="currentColor" transform="rotate(45 14 14)" />
+            </svg>
+            Finox
+          </a>
+          <p>Architecting enterprise-scale ETL/ELT pipelines and cloud data infrastructure.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram" title="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+            <a href="#" aria-label="Twitter / X" title="Twitter">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+              </svg>
+            </a>
+            <a href="#" aria-label="LinkedIn" title="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+            </a>
+            <a href="#" aria-label="Dribbble" title="Dribbble">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path
+                  d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.93-9.65-.93-4.14 0-7.59.93-11.23 2.74" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="skills.html">Data Engineering</a></li>
+            <li><a href="skills.html">Cloud Architecture</a></li>
+            <li><a href="skills.html">ETL/ELT Pipelines</a></li>
+            <li><a href="skills.html">Machine Learning</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:sravanthi.mahamyjobit@gmail.com">sravanthi.mahamyjobit@gmail.com</a></li>
+            <li><a href="tel:+1234567890">617-863-2387</a></li>
+            <li><a href="contact.html">New York, USA</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Sravanthi. All rights reserved.</p>
+        <div>
+          <a href="privacy.html">Privacy Policy</a>
+          <span style="margin: 0 8px; color: var(--text-muted);">|</span>
+          <a href="terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- Scroll to Top -->
+  <div class="scroll-top" role="button" aria-label="Scroll to top" title="Scroll to top">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M10 16V4M10 4L4 10M10 4L16 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/supabaseClient.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/global.js"></script>
+  <script src="js/seo.js"></script>
+  <script src="js/home.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

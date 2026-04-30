@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messages — Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <div id="sidebarContainer"></div>
+  <main class="admin-main">
+    <header class="admin-header"><div class="admin-header-left"><h1>Contact Messages</h1><div class="admin-header-sub">Form submissions from your website</div></div></header>
+    <div class="admin-content">
+      <div style="display:flex;gap:8px;margin-bottom:20px">
+        <button class="btn btn-ghost btn-sm filter-btn active" data-status="all">All</button>
+        <button class="btn btn-ghost btn-sm filter-btn" data-status="new">
+          <span class="badge badge-info" style="margin-right:4px">●</span>New
+        </button>
+        <button class="btn btn-ghost btn-sm filter-btn" data-status="read">Read</button>
+        <button class="btn btn-ghost btn-sm filter-btn" data-status="replied">Replied</button>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Subject</th><th>Preview</th><th>Status</th><th>Date</th></tr></thead>
+          <tbody id="messagesTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Message Detail Modal -->
+<div class="modal-overlay" id="msgModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="msgSubject">Message</div>
+        <div style="font-size:13px;color:#9CA3AF;margin-top:2px"><span id="msgDate"></span> · <span id="msgStatus"></span></div>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('msgModal').classList.remove('active')">×</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <div style="flex:1"><div style="font-size:12px;font-weight:600;color:#9CA3AF;text-transform:uppercase;margin-bottom:4px">From</div><div style="font-size:14px;font-weight:600" id="msgName"></div><div style="font-size:13px;color:#2563EB" id="msgEmail"></div></div>
+      </div>
+      <div style="background:#F9FAFB;border-radius:10px;padding:20px;font-size:14px;color:#374151;line-height:1.7;white-space:pre-wrap;border:1px solid #E5E7EB" id="msgBody"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger btn-sm" id="deleteMsg">Delete</button>
+      <button class="btn btn-ghost btn-sm" id="markRead">Mark Read</button>
+      <button class="btn btn-success btn-sm" id="markReplied">Mark Replied</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script type="module" src="js/contact.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects - D.Nova | Sravanthi Portfolio</title>
+  <meta name="description" content="Browse D.Nova's selected works including branding, UI/UX, web design, and product design projects.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <nav class="navbar scrolled" role="navigation">
+    <div class="container">
+      <a href="index.html" class="nav-logo"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="4" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(45 14 14)"/><rect x="8" y="8" width="12" height="12" rx="2" fill="currentColor" transform="rotate(45 14 14)"/></svg>Sravanthi</a>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="experience.html">Experience</a>
+        <a href="projects.html" class="active">Projects</a>
+        <a href="resume.html">Resume</a>
+        <a href="certifications.html">Certifications</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-cta"><a href="resume.html" class="btn btn-primary">
+          Download Resume</a></div>
+      <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay"><a href="index.html">Home</a><a href="about.html">About</a><a href="skills.html">Skills</a><a href="experience.html">Experience</a><a href="projects.html">Projects</a><a href="resume.html">Resume</a>
+        <a href="certifications.html">Certifications</a>
+        <a href="contact.html">Contact</a></div>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="reveal">Selected Works</h1>
+      <p class="reveal">A curated collection of enterprise data engineering and machine learning projects</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="filter-tabs reveal">
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="pipelines">Data Pipelines</button>
+        <button class="filter-tab" data-filter="ml">Machine Learning</button>
+        <button class="filter-tab" data-filter="analytics">Analytics</button>
+        <button class="filter-tab" data-filter="infrastructure">Infrastructure</button>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid">
+        <!-- Skeleton loading state -->
+        <div class="project-card"><div class="skeleton" style="height:220px;border-radius:12px"></div></div>
+        <div class="project-card"><div class="skeleton" style="height:220px;border-radius:12px"></div></div>
+        <div class="project-card"><div class="skeleton" style="height:220px;border-radius:12px"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="4" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(45 14 14)"/><rect x="8" y="8" width="12" height="12" rx="2" fill="currentColor" transform="rotate(45 14 14)"/></svg>Sravanthi</a>
+          <p>Architecting enterprise-scale ETL/ELT pipelines and cloud data infrastructure.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="#" aria-label="Dribbble"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.93-9.65-.93-4.14 0-7.59.93-11.23 2.74"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-column"><h4>Navigation</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="skills.html">Skills</a></li><li><a href="projects.html">Projects</a></li></ul></div>
+        <div class="footer-column"><h4>Services</h4><ul><li><a href="skills.html">Data Engineering</a></li>
+            <li><a href="skills.html">Cloud Architecture</a></li>
+            <li><a href="skills.html">ETL/ELT Pipelines</a></li>
+            <li><a href="skills.html">Machine Learning</a></li></ul></div>
+        <div class="footer-column"><h4>Contact</h4><ul><li><a href="mailto:sravanthi.mahamyjobit@gmail.com">sravanthi.mahamyjobit@gmail.com</a></li><li><a href="tel:+1234567890">617-863-2387</a></li><li><a href="contact.html">New York, USA</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2024 Sravanthi. All rights reserved.</p><div><a href="privacy.html">Privacy Policy</a><span style="margin: 0 8px;">|</span><a href="terms.html">Terms of Service</a></div></div>
+    </div>
+  </footer>
+
+
+  <div class="scroll-top" role="button" aria-label="Scroll to top"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 16V4M10 4L4 10M10 4L16 10" stroke="currentColor" stroke-width="1.5"/></svg></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/supabaseClient.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/global.js"></script>
+  <script src="js/seo.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

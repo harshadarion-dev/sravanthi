@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media — Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <div id="sidebarContainer"></div>
+  <main class="admin-main">
+    <header class="admin-header">
+      <div class="admin-header-left"><h1>Media Library</h1><div class="admin-header-sub">Upload and manage project images</div></div>
+      <button class="btn btn-primary" id="uploadBtn" onclick="document.getElementById('mediaInput').click()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload Images
+      </button>
+    </header>
+    <div class="admin-content">
+      <div class="card" style="margin-bottom:24px">
+        <div class="card-body">
+          <div class="upload-zone" id="uploadZone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <div class="upload-zone-title">Drag & drop images here</div>
+            <div class="upload-zone-sub">PNG, JPG, WebP supported</div>
+          </div>
+          <input type="file" id="mediaInput" multiple accept="image/*" style="display:none">
+        </div>
+      </div>
+      <div class="page-header"><h2 style="font-size:16px">All Images</h2></div>
+      <div class="media-grid" id="mediaGrid"><p style="color:#9CA3AF;font-size:14px">Loading…</p></div>
+    </div>
+  </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script type="module" src="js/media.js"></script>
+</body>
+</html>

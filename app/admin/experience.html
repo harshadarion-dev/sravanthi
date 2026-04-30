@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience — Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <div id="sidebarContainer"></div>
+  <main class="admin-main">
+    <header class="admin-header">
+      <div class="admin-header-left"><h1>Experience</h1></div>
+      <button class="btn btn-primary" id="addExpBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Role
+      </button>
+    </header>
+    <div class="admin-content">
+      <div id="expList"></div>
+    </div>
+  </main>
+</div>
+<div class="modal-overlay" id="expModal">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title" id="modalTitle">Add Experience</div><button class="modal-close" data-close-modal>×</button></div>
+    <div class="modal-body">
+      <form id="expForm">
+        <div class="form-grid" style="margin-bottom:20px">
+          <div class="form-group"><label>Job Title *</label><input type="text" name="title" class="form-control" placeholder="Senior Data Engineer" required></div>
+          <div class="form-group"><label>Company *</label><input type="text" name="company" class="form-control" placeholder="Wells Fargo" required></div>
+          <div class="form-group"><label>Location</label><input type="text" name="location" class="form-control" placeholder="New York, USA"></div>
+          <div class="form-group"><label>Start Date</label><input type="date" name="start_date" class="form-control"></div>
+          <div class="form-group"><label>End Date</label><input type="date" name="end_date" class="form-control"><div class="form-hint">Leave blank if current role</div></div>
+          <div class="form-group form-full"><label>Description</label><textarea name="description" class="form-control" placeholder="Describe your responsibilities and achievements…"></textarea></div>
+          <div class="form-group form-full"><label>Tags / Technologies</label><input type="text" name="tags" class="form-control" placeholder="GCP, BigQuery, Python, Dataflow"><div class="form-hint">Comma-separated</div></div>
+        </div>
+        <div class="modal-footer" style="padding:0">
+          <button type="button" class="btn btn-ghost" data-close-modal>Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveExpBtn">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script type="module" src="js/experience.js"></script>
+</body>
+</html>
