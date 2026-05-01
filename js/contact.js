@@ -12,11 +12,11 @@ async function initContact() {
 function renderContactDetails(s) {
   const pairs = {
     contactEmail: s.email ? { href: `mailto:${s.email}`, text: s.email } : null,
-    contactPhone: s.phone ? { href: `tel:${s.phone.replace(/\s/g, '')}`, text: s.phone } : null,
+    contactPhone: s.phone ? { href: `tel:${String(s.phone).replace(/\s/g, '')}`, text: s.phone } : null,
     contactLocation: s.location ? { text: s.location } : null,
-    socialLinkedin: s.linkedin ? { href: s.linkedin } : null,
-    socialGithub: s.github ? { href: s.github } : null,
-    socialTwitter: s.twitter ? { href: s.twitter } : null,
+    socialLinkedin: s.linkedin ? { href: ensureUrl(s.linkedin) } : null,
+    socialGithub: s.github ? { href: ensureUrl(s.github) } : null,
+    socialTwitter: s.twitter ? { href: ensureUrl(s.twitter) } : null,
   };
 
   Object.entries(pairs).forEach(([id, val]) => {

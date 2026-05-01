@@ -42,7 +42,14 @@ function initSaveBtns() {
       setLoading(btn, true);
       try {
         const upserts = [];
-        fields.forEach(f => { upserts.push({ key: f.dataset.key, value: f.value }); });
+        fields.forEach(f => {
+          let val = f.value.trim();
+          if (section === 'social' && val && !val.match(/^https?:\/\//i)) {
+            val = 'https://' + val;
+            f.value = val;
+          }
+          upserts.push({ key: f.dataset.key, value: val });
+        });
         const { error } = await sb.from('settings').upsert(upserts, { onConflict: 'key' });
         if (error) throw error;
         showToast('Settings saved!');

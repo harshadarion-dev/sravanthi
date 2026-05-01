@@ -111,6 +111,11 @@
         <h1 class="hero-title reveal reveal-delay-1">Hello</h1>
         <p class="hero-subtitle reveal reveal-delay-2" id="heroSubtitle">I'm Sravanthi, Senior Data Engineer</p>
 
+        <div class="hero-cta reveal reveal-delay-3" style="display:flex;gap:16px;margin-top:24px;margin-bottom:32px;justify-content:center;">
+           <a href="contact.html" class="btn btn-primary">Let's Talk</a>
+           <a href="projects.html" class="btn" style="border: 1px solid var(--border-color); color: var(--text-color); padding: 12px 24px; border-radius: 8px; font-weight: 500; display: inline-flex; align-items: center;">View Work</a>
+        </div>
+
         <a href="#about" class="hero-scroll reveal reveal-delay-3">
           <div class="hero-scroll-icon">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -139,6 +144,12 @@
             infrastructure. Expert in Python, SQL, and distributed systems with proven ability to design petabyte-scale
             ingestion systems and implement machine learning feature pipelines.
           </p>
+          <a href="about.html" class="link-arrow reveal reveal-delay-2" style="margin-top: 24px; display: inline-flex;">
+            More About Me
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="margin-left: 8px;">
+              <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
         </div>
 
         <div class="about-right">
@@ -210,7 +221,8 @@
       <div class="timeline-nav reveal">
         <a href="experience.html" class="timeline-nav-btn" aria-label="View full experience">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
           </svg>
         </a>
       </div>
@@ -226,7 +238,8 @@
       </div>
       <a href="contact.html" class="cta-banner-btn" aria-label="Contact Me">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
         </svg>
       </a>
     </div>
@@ -240,7 +253,8 @@
         <a href="projects.html" class="link-arrow reveal">
           View More
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
           </svg>
         </a>
       </div>
@@ -253,7 +267,7 @@
       </div>
     </div>
   </section>
-</section>
+  </section>
 
   <!-- Insights & Trends Section -->
   <section class="section" id="blog" style="padding-top: 0;">
@@ -270,7 +284,7 @@
       </div>
 
       <div class="blog-grid">
-        <article class="blog-card reveal">
+        <article class="blog-card reveal" style="cursor:pointer;" onclick="window.location.href='skills.html'">
           <div class="blog-card-image">
             <img src="assets/images/blog-1.jpg" alt="Cloud Data Architecture" loading="lazy">
           </div>
@@ -279,7 +293,7 @@
             Cloud Composer for reliable analytics.</p>
         </article>
 
-        <article class="blog-card reveal reveal-delay-1">
+        <article class="blog-card reveal reveal-delay-1" style="cursor:pointer;" onclick="window.location.href='skills.html'">
           <div class="blog-card-image">
             <img src="assets/images/blog-2.jpg" alt="Machine Learning & AI" loading="lazy">
           </div>
@@ -288,7 +302,7 @@
             anomaly detection systems for predictive insights.</p>
         </article>
 
-        <article class="blog-card reveal reveal-delay-2">
+        <article class="blog-card reveal reveal-delay-2" style="cursor:pointer;" onclick="window.location.href='skills.html'">
           <div class="blog-card-image">
             <img src="assets/images/project-1.jpg" alt="Data Quality & Governance" loading="lazy">
           </div>
@@ -388,6 +402,11 @@
           <a href="privacy.html">Privacy Policy</a>
           <span style="margin: 0 8px; color: var(--text-muted);">|</span>
           <a href="terms.html">Terms of Service</a>
+          <span style="margin: 0 8px; color: var(--text-muted);">|</span>
+          <a href="admin/login.html" aria-label="Admin Login"><svg width="16" height="16" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: text-bottom;">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" />
+            </svg></a>
         </div>
       </div>
     </div>
