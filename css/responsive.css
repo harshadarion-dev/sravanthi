@@ -265,12 +265,6 @@
     height: 40px;
   }
 
-  /* Ticker */
-  .ticker-item {
-    font-size: 12px;
-    padding: 0 20px;
-  }
-
   /* Hero available badge */
   .hero-available-badge {
     font-size: 11px;
@@ -384,10 +378,6 @@
   .reveal {
     opacity: 1;
     transform: none;
-  }
-
-  .ticker-track {
-    animation: none;
   }
 
   .hero-available-dot {

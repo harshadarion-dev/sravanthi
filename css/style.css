@@ -593,50 +593,6 @@ textarea.form-input {
   opacity: 0.3;
 }
 
-/* ---- Tech Stack Ticker ---- */
-.ticker-wrapper {
-  overflow: hidden;
-  border-top: 1px solid var(--border-light);
-  border-bottom: 1px solid var(--border-light);
-  background: var(--bg-white);
-  padding: 14px 0;
-  user-select: none;
-  white-space: nowrap;
-}
-
-.ticker-track {
-  display: inline-block;
-  white-space: nowrap;
-  animation: ticker-scroll 30s linear infinite;
-}
-
-.ticker-wrapper:hover .ticker-track {
-  animation-play-state: paused;
-}
-
-.ticker-items {
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
-  padding-right: 0;
-}
-
-.ticker-item {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-  padding: 0 28px;
-  white-space: nowrap;
-  transition: color var(--duration-fast);
-}
-
-.ticker-sep {
-  color: var(--border-light);
-  font-size: 10px;
-  flex-shrink: 0;
-}
 
 /* ---- About Section ---- */
 .about-grid {
@@ -1456,11 +1412,6 @@ textarea.form-input {
 
 @keyframes drawArrow {
   to { stroke-dashoffset: 0; }
-}
-
-@keyframes ticker-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
 }
 
 @keyframes status-pulse {
