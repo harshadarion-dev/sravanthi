@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
           <div style="padding:0 4px;">
             <div style="font-size:12px;color:var(--accent);font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">
-              ${b.tags ? b.tags.split(',')[0].trim() : 'Blog'}
+              ${(b.tags && typeof b.tags === 'string') ? b.tags.split(',')[0].trim() : 'Blog'}
             </div>
             <h2 class="blog-card-title" itemprop="headline" style="font-size:1.1rem;">${b.title}</h2>
             <p class="blog-card-excerpt" itemprop="description">${b.excerpt || ''}</p>
@@ -46,6 +46,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   } catch (err) {
     console.error('Error loading blogs:', err);
-    container.innerHTML = `<div class="empty-state-block" style="color:var(--error);">Failed to load articles.</div>`;
+    container.innerHTML = `<div class="empty-state-block" style="color:var(--error);">Failed to load articles. <br><span style="font-size:12px;opacity:0.8;">(${err.message})</span></div>`;
   }
 });
