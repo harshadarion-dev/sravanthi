@@ -48,14 +48,47 @@
   <link rel="preload" href="assets/images/hero.png" as="image" fetchpriority="high">
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
+    rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </noscript>
 
   <!-- STYLES -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Sravanthi Maha",
+    "url": "https://sravanthimaha.com",
+    "image": "https://sravanthimaha.com/assets/images/hero.png",
+    "jobTitle": "Senior GCP Data Engineer",
+    "description": "Senior GCP Data Engineer with 6+ years architecting petabyte-scale ETL/ELT pipelines using BigQuery, Dataflow, Vertex AI & Cloud Composer.",
+    "address": { "@type": "PostalAddress", "addressLocality": "New York", "addressRegion": "NY", "addressCountry": "US" },
+    "alumniOf": [],
+    "knowsAbout": ["BigQuery", "Dataflow", "Vertex AI", "Cloud Composer", "Terraform", "Python", "ETL Pipelines", "Data Engineering"],
+    "sameAs": ["https://www.linkedin.com/in/sravanthimaha"],
+    "worksFor": { "@type": "Organization", "name": "Wells Fargo" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://sravanthimaha.com",
+    "name": "Sravanthi Maha — Senior GCP Data Engineer",
+    "description": "Portfolio of Sravanthi Maha, Senior GCP Data Engineer specializing in BigQuery, Vertex AI, and ETL/ELT pipelines.",
+    "potentialAction": { "@type": "SearchAction", "target": "https://sravanthimaha.com/?q={search_term_string}", "query-input": "required name=search_term_string" }
+  }
+  </script>
 </head>
 
 <body>
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="readingProgress" role="progressbar" aria-label="Page reading progress"></div>
 
   <!-- Navigation -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
@@ -115,6 +148,12 @@
   <section class="hero" id="home">
     <div class="container">
       <div class="hero-content">
+
+        <div class="hero-available-badge reveal">
+          <span class="hero-available-dot"></span>
+          Open to New Opportunities
+        </div>
+
         <div class="hero-stats reveal">
           <div class="hero-stat">
             <div class="hero-stat-number" data-count="6" data-prefix="+" data-suffix="">+0</div>
@@ -124,18 +163,23 @@
             <div class="hero-stat-number" data-count="100" data-prefix="+" data-suffix="M">0M</div>
             <div class="hero-stat-label">Records Processed</div>
           </div>
+          <div class="hero-stat">
+            <div class="hero-stat-number" data-count="3" data-prefix="" data-suffix="+">0+</div>
+            <div class="hero-stat-label">Big Tech Clients</div>
+          </div>
         </div>
 
         <h1 class="hero-title reveal reveal-delay-1">Sravanthi Maha</h1>
         <p class="hero-subtitle reveal reveal-delay-2" id="heroSubtitle">Senior GCP Data Engineer — BigQuery, Vertex AI
           &amp; ETL/ELT Architect</p>
 
-        <div class="hero-cta reveal reveal-delay-3"
-          style="display:flex;gap:16px;margin-top:24px;margin-bottom:32px;justify-content:center;">
+        <div class="hero-cta reveal reveal-delay-3">
           <a href="contact.html" class="btn btn-primary">Hire Me</a>
-          <a href="projects.html" class="btn"
-            style="border:1px solid var(--border-color);color:var(--text-color);padding:12px 24px;border-radius:8px;font-weight:500;display:inline-flex;align-items:center;">View
-            Projects</a>
+          <a href="projects.html" class="btn btn-outline-hero">View Projects
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
         </div>
 
         <a href="#about" class="hero-scroll reveal reveal-delay-3">
@@ -151,10 +195,69 @@
 
       <div class="hero-portrait reveal reveal-delay-2">
         <img src="assets/images/hero.png" alt="Sravanthi Maha — Senior GCP Data Engineer" loading="eager"
-          fetchpriority="high" width="480" height="560" id="heroPortrait">
+          fetchpriority="high" width="480" height="560" id="heroPortrait" decoding="async">
       </div>
     </div>
   </section>
+
+  <!-- Tech Stack Ticker -->
+  <div class="ticker-wrapper" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-items">
+        <span class="ticker-item">BigQuery</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Vertex AI</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Dataflow</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Cloud Composer</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Terraform</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Pub/Sub</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Apache Spark</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Python</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">dbt</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">ETL / ELT</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">GCP</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Data Governance</span>
+        <span class="ticker-sep">✦</span>
+      </div>
+      <!-- Duplicate for seamless loop -->
+      <div class="ticker-items" aria-hidden="true">
+        <span class="ticker-item">BigQuery</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Vertex AI</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Dataflow</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Cloud Composer</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Terraform</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Pub/Sub</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Apache Spark</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Python</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">dbt</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">ETL / ELT</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">GCP</span>
+        <span class="ticker-sep">✦</span>
+        <span class="ticker-item">Data Governance</span>
+        <span class="ticker-sep">✦</span>
+      </div>
+    </div>
+  </div>
 
   <!-- About Me Section -->
   <section class="section" id="about">
@@ -448,7 +551,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2025 Sravanthi Maha. All rights reserved. | Senior GCP Data Engineer, New York</p>
+        <p>&copy; 2026 Sravanthi Maha. All rights reserved. | Senior GCP Data Engineer, New York</p>
         <div>
           <a href="privacy.html">Privacy Policy</a>
           <span style="margin:0 8px;color:var(--text-muted);">|</span>
@@ -471,15 +574,15 @@
     </svg>
   </div>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-  <script src="js/supabaseClient.js?v=2"></script>
-  <script src="js/api.js?v=2"></script>
-  <script src="js/global.js?v=2"></script>
-  <script src="js/seo.js?v=2"></script>
-  <script src="js/analytics.js?v=2"></script>
-  <script src="js/home.js?v=2"></script>
-  <script src="js/main.js?v=2"></script>
+  <!-- Scripts —— Supabase loads first (sync), rest deferred so parser isn't blocked -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script>
+  <script src="js/supabaseClient.js?v=3" defer></script>
+  <script src="js/api.js?v=3" defer></script>
+  <script src="js/global.js?v=3" defer></script>
+  <script src="js/seo.js?v=3" defer></script>
+  <script src="js/analytics.js?v=3" defer></script>
+  <script src="js/home.js?v=3" defer></script>
+  <script src="js/main.js?v=3" defer></script>
 </body>
 
 </html>

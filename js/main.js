@@ -302,18 +302,27 @@
   }
 
   // ============================================
-  // PARALLAX EFFECT FOR HERO PORTRAIT
+  // READING PROGRESS BAR
+  // ============================================
+  function updateReadingProgress() {
+    const bar = document.getElementById('readingProgress');
+    if (!bar) return;
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+    bar.style.width = pct + '%';
+    bar.setAttribute('aria-valuenow', Math.round(pct));
+  }
+
+  // ============================================
+  // PARALLAX EFFECT — DISABLED FOR LCP HEALTH
+  // Applying CSS transforms to the hero portrait on every scroll event
+  // prevents the browser from promoting it to its own compositor layer,
+  // which directly worsens Largest Contentful Paint timing.
+  // The decorative rings in CSS provide visual depth without the perf hit.
   // ============================================
   function initParallax() {
-    const portrait = document.querySelector('.hero-portrait img');
-    if (!portrait) return;
-
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY;
-      if (scrolled < window.innerHeight) {
-        portrait.style.transform = `translateY(${scrolled * 0.15}px)`;
-      }
-    }, { passive: true });
+    // No-op: parallax removed to keep hero image paint-compositing-friendly
   }
 
   // ============================================
@@ -373,6 +382,7 @@
   function init() {
     // Event listeners
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
 
     if (navToggle) {
       navToggle.addEventListener('click', toggleMobileNav);
@@ -390,6 +400,7 @@
 
     // Initialize features
     initStaggerAnimations();
+    // Note: initScrollReveal is also called by global.js — deduplication guard inside IntersectionObserver means elements won't double-fire
     initScrollReveal();
     animateCounters();
     animateSkillBars();
@@ -397,13 +408,14 @@
     initContactForm();
     initSmoothScroll();
     setActiveNav();
-    initParallax();
+    initParallax();        // now a no-op, kept for API compatibility
     initWhatsAppButton();
     initArrowDraw();
 
-    // Initial navbar state
+    // Initial state
     handleNavbarScroll();
     handleScrollTop();
+    updateReadingProgress();
 
     // Add loaded class to body for initial animations
     document.body.classList.add('loaded');

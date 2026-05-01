@@ -1,23 +1,25 @@
 /* ============================================
-   Finox Portfolio - Main Stylesheet
+   Sravanthi Maha Portfolio - Main Stylesheet
    ============================================ */
 
 /* ---- CSS Variables ---- */
 :root {
   --bg-primary: #F5F3EE;
   --bg-white: #FFFFFF;
-  --bg-dark: #1E1E1E;
+  --bg-dark: #1A1A1A;
   --bg-card: #FAFAF8;
   --text-primary: #1A1A1A;
   --text-secondary: #6B6B6B;
   --text-muted: #9A9A9A;
   --border-light: #E8E6E1;
   --tag-bg: #F0EEEA;
-  --accent-black: #000000;
+  --accent-black: #111111;
   --accent-cream: #F5F3EE;
+  --accent-green: #16A34A;
   --whatsapp: #25D366;
   --error: #E74C3C;
   --success: #27AE60;
+  --progress-color: #1A1A1A;
 
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -266,6 +268,19 @@ textarea.form-input {
   resize: vertical;
 }
 
+/* ---- Reading Progress Bar ---- */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #1A1A1A 0%, #555 100%);
+  z-index: 1001;
+  transition: width 0.1s linear;
+  border-radius: 0 2px 2px 0;
+}
+
 /* ---- Navigation ---- */
 .navbar {
   position: fixed;
@@ -278,8 +293,10 @@ textarea.form-input {
 }
 
 .navbar.scrolled {
-  background: var(--bg-white);
-  box-shadow: 0 1px 20px rgba(0,0,0,0.06);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 4px 24px rgba(0,0,0,0.04);
 }
 
 .navbar .container {
@@ -378,37 +395,91 @@ textarea.form-input {
   overflow: hidden;
 }
 
+/* Subtle decorative grid */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 80% 60% at 20% 40%, black 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 20% 40%, black 0%, transparent 70%);
+}
+
 .hero .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Hero Available Badge ---- */
+.hero-available-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(22, 163, 74, 0.08);
+  border: 1px solid rgba(22, 163, 74, 0.2);
+  color: var(--accent-green);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 40px;
+  margin-bottom: 24px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.hero-available-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  animation: status-pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
 }
 
 .hero-stats {
   display: flex;
   gap: 32px;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .hero-stat {
   text-align: left;
+  position: relative;
+}
+
+.hero-stat:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  background: var(--border-light);
 }
 
 .hero-stat-number {
   font-family: var(--font-sans);
   font-size: 32px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
-  line-height: 1.2;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
 }
 
 .hero-stat-label {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
   margin-top: 4px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
 }
 
 .hero-title {
@@ -421,13 +492,43 @@ textarea.form-input {
 }
 
 .hero-subtitle {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text-secondary);
-  margin-bottom: 40px;
+  margin-bottom: 32px;
+  line-height: 1.6;
 }
 
 .hero-subtitle::before {
   content: '— ';
+}
+
+/* ---- Hero CTA ---- */
+.hero-cta {
+  display: flex;
+  gap: 12px;
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+
+.btn-outline-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 40px;
+  border: 1.5px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  background: transparent;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.btn-outline-hero:hover {
+  border-color: var(--text-primary);
+  background: var(--text-primary);
+  color: var(--bg-white);
+  transform: translateY(-1px);
 }
 
 .hero-scroll {
@@ -467,6 +568,73 @@ textarea.form-input {
   width: auto;
   object-fit: cover;
   border-radius: 32px;
+  /* No parallax transform — keeps LCP element compositing-friendly */
+  will-change: auto;
+}
+
+/* Subtle floating ring decoration around portrait */
+.hero-portrait::before {
+  content: '';
+  position: absolute;
+  inset: -16px;
+  border-radius: 40px;
+  border: 1px solid var(--border-light);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.hero-portrait::after {
+  content: '';
+  position: absolute;
+  inset: -32px;
+  border-radius: 48px;
+  border: 1px dashed var(--border-light);
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* ---- Tech Stack Ticker ---- */
+.ticker-wrapper {
+  overflow: hidden;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg-white);
+  padding: 14px 0;
+  user-select: none;
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 30s linear infinite;
+}
+
+.ticker-wrapper:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+.ticker-items {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding-right: 0;
+}
+
+.ticker-item {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  padding: 0 28px;
+  white-space: nowrap;
+  transition: color var(--duration-fast);
+}
+
+.ticker-sep {
+  color: var(--border-light);
+  font-size: 10px;
+  flex-shrink: 0;
 }
 
 /* ---- About Section ---- */
@@ -1289,6 +1457,16 @@ textarea.form-input {
   to { stroke-dashoffset: 0; }
 }
 
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
 /* Scroll Reveal */
 .reveal {
   opacity: 0;
@@ -1310,6 +1488,23 @@ textarea.form-input {
 /* Stagger children */
 .stagger-container .reveal {
   transition-delay: calc(var(--i, 0) * 100ms);
+}
+
+/* ---- Performance: defer rendering of off-screen sections ---- */
+.section[id="portfolio"],
+.section[id="competencies"],
+.section[id="faq"] {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}
+
+/* ---- Focus Styles (Accessibility) ---- */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 /* ---- Filter Tabs ---- */
