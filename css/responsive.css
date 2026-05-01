@@ -265,11 +265,6 @@
     height: 40px;
   }
 
-  /* Hero available badge */
-  .hero-available-badge {
-    font-size: 11px;
-    padding: 5px 12px;
-  }
 
   /* Hero portrait decorative rings — hide on mobile to reduce paint */
   .hero-portrait::before,
@@ -380,9 +375,6 @@
     transform: none;
   }
 
-  .hero-available-dot {
-    animation: none;
-  }
 
   .reading-progress {
     transition: none;

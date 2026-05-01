@@ -418,32 +418,6 @@ textarea.form-input {
   z-index: 1;
 }
 
-/* ---- Hero Available Badge ---- */
-.hero-available-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(22, 163, 74, 0.08);
-  border: 1px solid rgba(22, 163, 74, 0.2);
-  color: var(--accent-green);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 40px;
-  margin-bottom: 24px;
-  letter-spacing: 0.2px;
-  text-transform: uppercase;
-}
-
-.hero-available-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent-green);
-  animation: status-pulse 2s ease-in-out infinite;
-  flex-shrink: 0;
-}
-
 .hero-stats {
   display: flex;
   gap: 32px;
@@ -1414,10 +1388,6 @@ textarea.form-input {
   to { stroke-dashoffset: 0; }
 }
 
-@keyframes status-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.85); }
-}
 
 /* Scroll Reveal */
 .reveal {
