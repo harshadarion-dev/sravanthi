@@ -171,3 +171,57 @@ insert into experience (title, company, location, start_date, end_date, descript
   ('Quality Specialist', 'Amazon', 'India', '2021-09-01', '2023-07-01', 'Designed automated data quality validation framework achieving 95%+ accuracy and reduced manual reviews by 28%.', 'Python,SQL,Data Quality', 2),
   ('Data Engineer', 'Tech Mahindra (Verizon)', 'India', '2019-01-01', '2021-08-01', 'Migrated legacy on-premises ETL pipelines to GCP Dataflow, processing 100M+ telecom records daily.', 'Dataflow,Vertex AI,BigQuery', 3)
 on conflict do nothing;
+
+-- 1. Reload schema cache just in case
+NOTIFY pgrst, 'reload schema';
+
+-- 2. Create the blogs table (using modern Postgres UUID generation)
+CREATE TABLE blogs (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  title TEXT NOT NULL,
+  slug TEXT NOT NULL UNIQUE,
+  excerpt TEXT,
+  content TEXT NOT NULL,
+  tags TEXT,
+  thumbnail_url TEXT,
+  published BOOLEAN DEFAULT true,
+  published_at DATE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- 3. Setup Row Level Security (RLS)
+ALTER TABLE blogs ENABLE ROW LEVEL SECURITY;
+
+-- 4. Allow public read access to published blogs
+CREATE POLICY "Public profiles are viewable by everyone." 
+  ON blogs FOR SELECT USING (published = true);
+
+-- 5. Allow authenticated admins to do everything
+CREATE POLICY "Admins can insert blogs" ON blogs FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Admins can update blogs" ON blogs FOR UPDATE USING (auth.role() = 'authenticated');
+CREATE POLICY "Admins can delete blogs" ON blogs FOR DELETE USING (auth.role() = 'authenticated');
+CREATE POLICY "Admins can view all blogs" ON blogs FOR SELECT USING (auth.role() = 'authenticated');
+
+-- 1. Create the blog-images bucket (publicly readable)
+INSERT INTO storage.buckets (id, name, public) 
+VALUES ('blog-images', 'blog-images', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- 2. Allow anyone to view the images
+CREATE POLICY "Public Read Access" 
+  ON storage.objects FOR SELECT 
+  USING (bucket_id = 'blog-images');
+
+-- 3. Allow only you (authenticated admin) to upload images
+CREATE POLICY "Admin Insert Access" 
+  ON storage.objects FOR INSERT 
+  WITH CHECK (bucket_id = 'blog-images' AND auth.role() = 'authenticated');
+
+-- 4. Allow only you to update/delete images
+CREATE POLICY "Admin Update Access" 
+  ON storage.objects FOR UPDATE 
+  USING (bucket_id = 'blog-images' AND auth.role() = 'authenticated');
+CREATE POLICY "Admin Delete Access" 
+  ON storage.objects FOR DELETE 
+  USING (bucket_id = 'blog-images' AND auth.role() = 'authenticated');

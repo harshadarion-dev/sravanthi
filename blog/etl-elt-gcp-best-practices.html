@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ETL vs ELT on Google Cloud Platform: Architecture Patterns for 2025 — Sravanthi Maha</title>
+  <meta name="description" content="When to use Dataflow ETL vs BigQuery ELT on GCP — trade-offs, cost models, hybrid patterns, and architecture decisions for modern cloud data stacks from a Senior Data Engineer.">
+  <meta name="keywords" content="ETL vs ELT GCP, Google Cloud ETL ELT, Dataflow ETL, BigQuery ELT, data pipeline architecture GCP, cloud data engineering patterns, ETL pipeline best practices 2025">
+  <meta name="author" content="Sravanthi Maha">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://sravanthimaha.com/blog/etl-elt-gcp-best-practices.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="ETL vs ELT on Google Cloud Platform: Architecture Patterns for 2025">
+  <meta property="og:description" content="When to use Dataflow ETL vs BigQuery ELT — trade-offs, cost models, and hybrid patterns for modern cloud data stacks.">
+  <meta property="og:image" content="https://sravanthimaha.com/assets/images/og-banner.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ETL vs ELT on GCP — Sravanthi Maha">
+  <meta name="twitter:image" content="https://sravanthimaha.com/assets/images/og-banner.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"ETL vs ELT on Google Cloud Platform: Architecture Patterns for 2025","author":{"@type":"Person","name":"Sravanthi Maha","jobTitle":"Senior GCP Data Engineer","url":"https://sravanthimaha.com"},"datePublished":"2026-04-10","dateModified":"2026-05-01","image":"https://sravanthimaha.com/assets/images/og-banner.png","mainEntityOfPage":"https://sravanthimaha.com/blog/etl-elt-gcp-best-practices.html","keywords":["ETL","ELT","GCP","Dataflow","BigQuery","Data Engineering"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Should I use ETL or ELT on Google Cloud Platform?","acceptedAnswer":{"@type":"Answer","text":"Use ETL (Dataflow) when you need to transform sensitive data before loading, when source data is very large and you need streaming transforms, or when transformation logic is complex and requires procedural code. Use ELT (BigQuery SQL) when data transformation can be expressed in SQL, when raw data storage cost is acceptable, and when analysts need access to raw data for ad-hoc exploration."}},{"@type":"Question","name":"What is the cost difference between ETL and ELT on GCP?","acceptedAnswer":{"@type":"Answer","text":"Dataflow ETL costs scale with vCPU hours and shuffle data volume. BigQuery ELT costs scale with bytes scanned during transformation. For most analytical workloads, BigQuery ELT is significantly cheaper — but for streaming pipelines processing millions of events per second, Dataflow becomes cost-competitive."}}]}</script>
+</head>
+<body>
+  <nav class="navbar scrolled" role="navigation">
+    <div class="container">
+      <a href="../index.html" class="nav-logo"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="4" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(45 14 14)"/><rect x="8" y="8" width="12" height="12" rx="2" fill="currentColor" transform="rotate(45 14 14)"/></svg>Sravanthi</a>
+      <div class="nav-links">
+        <a href="../about.html">About</a><a href="../skills.html">Skills</a>
+        <a href="../experience.html">Experience</a><a href="../projects.html">Projects</a>
+        <a href="../resume.html">Resume</a><a href="../contact.html">Contact</a>
+        <a href="../blog/" class="active">Blog</a>
+      </div>
+      <div class="nav-cta"><a href="../resume.html" class="btn btn-primary">Download Resume</a></div>
+      <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav-overlay">
+    <a href="../index.html">Home</a><a href="../about.html">About</a><a href="../skills.html">Skills</a>
+    <a href="../experience.html">Experience</a><a href="../projects.html">Projects</a>
+    <a href="../resume.html">Resume</a><a href="../contact.html">Contact</a><a href="../blog/">Blog</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="container" style="max-width:800px;">
+      <nav aria-label="Breadcrumb" style="font-size:13px;margin-bottom:16px;color:var(--text-muted);">
+        <a href="../index.html" style="color:var(--text-muted);">Home</a> /
+        <a href="../blog/" style="color:var(--text-muted);">Blog</a> / ETL vs ELT on GCP
+      </nav>
+      <div style="font-size:12px;color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;">ETL · ELT · Data Architecture</div>
+      <h1 class="reveal">ETL vs ELT on Google Cloud Platform: Architecture Patterns for 2025</h1>
+      <div style="font-size:13px;color:var(--text-muted);margin-top:20px;">
+        By <a href="../about.html" style="color:var(--text-color);font-weight:600;">Sravanthi Maha</a> · Apr 10, 2026 · 10 min read
+      </div>
+    </div>
+  </section>
+
+  <article class="section" style="padding-top:0;">
+    <div class="container" style="max-width:800px;">
+      <div class="about-text">
+        <p>One of the most common architectural decisions in cloud data engineering is choosing between <strong>ETL (Extract, Transform, Load)</strong> and <strong>ELT (Extract, Load, Transform)</strong>. On Google Cloud Platform, this translates concretely to: <strong>Dataflow ETL vs. BigQuery ELT</strong>. After architecting both at Wells Fargo, Amazon, and Verizon, here's my decision framework.</p>
+
+        <h2>What Changed: Why ELT Became Dominant</h2>
+        <p>Traditional ETL (transform before loading) made sense when storage was expensive and compute was cheap relative to I/O. Modern cloud data warehouses like BigQuery flipped this equation — storage is nearly free ($0.02/GB/month) while compute scales on-demand. This makes ELT — loading raw data first, then transforming in-warehouse — economically and operationally superior for most analytical workloads.</p>
+
+        <h2>ETL with Dataflow: When to Use It</h2>
+        <p><strong>Choose Dataflow ETL when:</strong></p>
+        <ul style="padding-left:24px;line-height:2.2;">
+          <li>You're processing <strong>streaming data</strong> (Pub/Sub → Dataflow → BigQuery) where transformation must happen in-flight</li>
+          <li>You need to <strong>mask/tokenize PII</strong> before any storage (compliance requirement)</li>
+          <li>Your transformation logic requires <strong>stateful processing</strong> (session windows, custom aggregations)</li>
+          <li>Source data volume is so large that loading raw data first would be cost-prohibitive</li>
+          <li>You need <strong>cross-source joins</strong> during ingestion (enriching events with API lookups)</li>
+        </ul>
+        <pre style="background:var(--bg-white);padding:20px;border-radius:8px;font-size:13px;overflow-x:auto;border:1px solid var(--border-color);"><code># Dataflow ETL: Real-time PII tokenization + enrichment
+import apache_beam as beam
+
+class TokenizePII(beam.DoFn):
+    def process(self, element):
+        element['ssn'] = tokenize(element['ssn'])
+        element['email'] = hash_email(element['email'])
+        yield element
+
+pipeline = (
+    p
+    | 'Read Pub/Sub' >> beam.io.ReadFromPubSub(subscription=SUB)
+    | 'Parse JSON'   >> beam.Map(json.loads)
+    | 'Tokenize PII' >> beam.ParDo(TokenizePII())
+    | 'Write BQ'     >> beam.io.WriteToBigQuery(TABLE)
+)</code></pre>
+
+        <h2>ELT with BigQuery: When to Use It</h2>
+        <p><strong>Choose BigQuery ELT when:</strong></p>
+        <ul style="padding-left:24px;line-height:2.2;">
+          <li>Transformation logic can be expressed in <strong>SQL</strong> (dimensional modeling, aggregations, joins)</li>
+          <li>You want analysts to <strong>query raw data</strong> for ad-hoc exploration alongside curated marts</li>
+          <li>You're running <strong>batch workloads</strong> where transformation latency of minutes is acceptable</li>
+          <li>You want <strong>transformation versioning</strong> via dbt or SQL migration scripts</li>
+          <li>Cost optimization is paramount — BigQuery ELT is typically 60-80% cheaper than equivalent Dataflow jobs</li>
+        </ul>
+        <pre style="background:var(--bg-white);padding:20px;border-radius:8px;font-size:13px;overflow-x:auto;border:1px solid var(--border-color);"><code>-- BigQuery ELT: Transform raw → curated in SQL
+CREATE OR REPLACE TABLE `project.curated.daily_sales` AS
+SELECT
+  DATE(order_timestamp) AS order_date,
+  product_id,
+  SUM(revenue) AS total_revenue,
+  COUNT(DISTINCT customer_id) AS unique_customers,
+  AVG(order_value) AS avg_order_value
+FROM `project.raw.orders`
+WHERE order_status = 'completed'
+  AND DATE(order_timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
+GROUP BY 1, 2;</code></pre>
+
+        <h2>The Hybrid Pattern: What We Use at Enterprise Scale</h2>
+        <p>At Wells Fargo, we use a <strong>hybrid Lambda Architecture</strong> where both paradigms coexist:</p>
+        <ol style="padding-left:24px;line-height:2.2;">
+          <li><strong>Speed Layer</strong>: Pub/Sub → Dataflow (ETL, PII masking) → BigQuery streaming buffer → real-time dashboards</li>
+          <li><strong>Batch Layer</strong>: GCS raw files → BigQuery Load Jobs (ELT, no transformation) → dbt transforms → data marts</li>
+          <li><strong>Serving Layer</strong>: BigQuery materialized views merge speed + batch layers for consistent querying</li>
+        </ol>
+
+        <h2>Decision Framework: ETL vs ELT</h2>
+        <div style="overflow-x:auto;margin:24px 0;">
+          <table style="width:100%;border-collapse:collapse;font-size:14px;">
+            <thead>
+              <tr style="background:var(--bg-white);border-bottom:2px solid var(--border-color);">
+                <th style="padding:12px;text-align:left;">Factor</th>
+                <th style="padding:12px;text-align:left;">ETL (Dataflow)</th>
+                <th style="padding:12px;text-align:left;">ELT (BigQuery)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border-color);"><td style="padding:12px;">Streaming</td><td style="padding:12px;">✅ Native</td><td style="padding:12px;">Limited</td></tr>
+              <tr style="border-bottom:1px solid var(--border-color);"><td style="padding:12px;">PII Masking</td><td style="padding:12px;">✅ Before storage</td><td style="padding:12px;">After load</td></tr>
+              <tr style="border-bottom:1px solid var(--border-color);"><td style="padding:12px;">Cost (batch)</td><td style="padding:12px;">Higher</td><td style="padding:12px;">✅ Lower</td></tr>
+              <tr style="border-bottom:1px solid var(--border-color);"><td style="padding:12px;">Analyst Access</td><td style="padding:12px;">Transformed only</td><td style="padding:12px;">✅ Raw + curated</td></tr>
+              <tr style="border-bottom:1px solid var(--border-color);"><td style="padding:12px;">Versioning</td><td style="padding:12px;">Code-based</td><td style="padding:12px;">✅ SQL/dbt</td></tr>
+              <tr><td style="padding:12px;">Stateful Logic</td><td style="padding:12px;">✅ Windows, sessions</td><td style="padding:12px;">Limited</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>FAQ</h2>
+        <h3>Should I use ETL or ELT on Google Cloud Platform?</h3>
+        <p>Use ETL (Dataflow) for streaming data, PII masking before storage, or complex stateful transformations. Use ELT (BigQuery SQL) for batch analytical workloads, SQL-expressible transforms, and when cost optimization is a priority. Most enterprise architectures use a hybrid of both.</p>
+
+        <h3>What is the cost difference between ETL and ELT on GCP?</h3>
+        <p>Dataflow ETL costs scale with vCPU hours and shuffle data volume. BigQuery ELT costs scale with bytes scanned. For analytical workloads, BigQuery ELT is significantly cheaper. For high-volume streaming pipelines, Dataflow becomes cost-competitive.</p>
+
+        <div style="background:var(--bg-white);border:1px solid var(--border-color);border-radius:12px;padding:24px;margin-top:48px;text-align:center;">
+          <h3 style="margin-bottom:8px;">Need ETL/ELT Architecture for Your GCP Stack?</h3>
+          <p style="margin-bottom:20px;color:var(--text-muted);">I design and implement production-grade ETL/ELT pipelines on GCP for enterprise teams.</p>
+          <a href="../contact.html" class="btn btn-primary">Contact Sravanthi Maha</a>
+        </div>
+
+        <div style="margin-top:40px;padding-top:32px;border-top:1px solid var(--border-color);">
+          <h3 style="font-size:1rem;margin-bottom:16px;">More Articles</h3>
+          <a href="bigquery-optimization-guide.html" style="display:block;margin-bottom:8px;color:var(--accent);">→ BigQuery Performance Optimization: A Complete Guide</a>
+          <a href="vertex-ai-ml-pipelines.html" style="display:block;color:var(--accent);">→ Building Production ML Pipelines with Vertex AI</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="justify-content:center;text-align:center;">
+        <p>&copy; 2025 Sravanthi Maha — Senior GCP Data Engineer. <a href="../index.html">Home</a> · <a href="../blog/">Blog</a> · <a href="../contact.html">Contact</a></p>
+      </div>
+    </div>
+  </footer>
+  <div class="scroll-top" role="button" aria-label="Scroll to top"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 16V4M10 4L4 10M10 4L16 10" stroke="currentColor" stroke-width="1.5"/></svg></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="../js/supabaseClient.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/global.js"></script>
+  <script src="../js/analytics.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

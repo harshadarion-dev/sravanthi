@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BigQuery Performance Optimization Guide — Sravanthi Maha | Senior GCP Data Engineer</title>
+  <meta name="description" content="Master BigQuery performance optimization: partitioning, clustering, materialized views, and slot management. Achieve 65% cost reduction from a Senior GCP Data Engineer.">
+  <meta name="keywords" content="BigQuery optimization, BigQuery partitioning clustering, BigQuery performance, GCP data engineering, BigQuery cost reduction, materialized views BigQuery">
+  <meta name="author" content="Sravanthi Maha">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://sravanthimaha.com/blog/bigquery-optimization-guide.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="BigQuery Performance Optimization: A Complete Guide">
+  <meta property="og:description" content="Master partitioning, clustering, materialized views, and slot management to cut query costs by 65%.">
+  <meta property="og:image" content="https://sravanthimaha.com/assets/images/og-banner.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BigQuery Performance Optimization — Sravanthi Maha">
+  <meta name="twitter:image" content="https://sravanthimaha.com/assets/images/og-banner.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"BigQuery Performance Optimization: A Complete Guide for Data Engineers","author":{"@type":"Person","name":"Sravanthi Maha","jobTitle":"Senior GCP Data Engineer","url":"https://sravanthimaha.com"},"datePublished":"2026-05-01","dateModified":"2026-05-01","publisher":{"@type":"Person","name":"Sravanthi Maha"},"image":"https://sravanthimaha.com/assets/images/og-banner.png","mainEntityOfPage":"https://sravanthimaha.com/blog/bigquery-optimization-guide.html","keywords":["BigQuery","GCP","Data Engineering","Performance Optimization"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I reduce BigQuery query costs?","acceptedAnswer":{"@type":"Answer","text":"Use table partitioning and clustering to limit data scanned, leverage materialized views to cache repeated query results, use column selection instead of SELECT *, and monitor slot utilization."}},{"@type":"Question","name":"What is the difference between BigQuery partitioning and clustering?","acceptedAnswer":{"@type":"Answer","text":"Partitioning divides a table into segments by date allowing BigQuery to skip entire partitions. Clustering sorts data within each partition by specified columns enabling efficient filtering. Using both provides maximum savings."}}]}</script>
+</head>
+<body>
+  <nav class="navbar scrolled" role="navigation">
+    <div class="container">
+      <a href="../index.html" class="nav-logo"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="4" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(45 14 14)"/><rect x="8" y="8" width="12" height="12" rx="2" fill="currentColor" transform="rotate(45 14 14)"/></svg>Sravanthi</a>
+      <div class="nav-links">
+        <a href="../about.html">About</a><a href="../skills.html">Skills</a>
+        <a href="../experience.html">Experience</a><a href="../projects.html">Projects</a>
+        <a href="../resume.html">Resume</a><a href="../contact.html">Contact</a>
+        <a href="../blog/" class="active">Blog</a>
+      </div>
+      <div class="nav-cta"><a href="../resume.html" class="btn btn-primary">Download Resume</a></div>
+      <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav-overlay">
+    <a href="../index.html">Home</a><a href="../about.html">About</a><a href="../skills.html">Skills</a>
+    <a href="../experience.html">Experience</a><a href="../projects.html">Projects</a>
+    <a href="../resume.html">Resume</a><a href="../contact.html">Contact</a><a href="../blog/">Blog</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="container" style="max-width:800px;">
+      <nav aria-label="Breadcrumb" style="font-size:13px;margin-bottom:16px;color:var(--text-muted);">
+        <a href="../index.html" style="color:var(--text-muted);">Home</a> /
+        <a href="../blog/" style="color:var(--text-muted);">Blog</a> / BigQuery Optimization
+      </nav>
+      <div style="font-size:12px;color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;">BigQuery · GCP · Performance</div>
+      <h1 class="reveal">BigQuery Performance Optimization: A Complete Guide for Data Engineers</h1>
+      <div style="font-size:13px;color:var(--text-muted);margin-top:20px;">
+        By <a href="../about.html" style="color:var(--text-color);font-weight:600;">Sravanthi Maha</a> · May 1, 2026 · 12 min read
+      </div>
+    </div>
+  </section>
+
+  <article class="section" style="padding-top:0;">
+    <div class="container" style="max-width:800px;">
+      <div class="about-text">
+        <p>BigQuery is Google Cloud's flagship serverless data warehouse — capable of querying petabytes in seconds. But without proper optimization, you'll burn through your budget and frustrate analysts with slow queries. After 6+ years architecting BigQuery solutions at <strong>Wells Fargo, Amazon, and Verizon</strong>, I've consistently achieved <strong>65% cost reductions and 2x latency improvements</strong> using the techniques below.</p>
+
+        <h2>1. Table Partitioning — The Biggest Single Win</h2>
+        <p>Partitioning divides tables by a date/timestamp column, allowing BigQuery to skip entire partitions during query execution — dramatically reducing bytes scanned and cost.</p>
+        <pre style="background:var(--bg-white);padding:20px;border-radius:8px;font-size:13px;overflow-x:auto;border:1px solid var(--border-color);"><code>CREATE TABLE `project.dataset.events`
+PARTITION BY DATE(event_timestamp)
+CLUSTER BY user_id, event_type
+AS SELECT * FROM `project.dataset.raw_events`;</code></pre>
+        <p>Moving from unpartitioned to date-partitioned tables at Wells Fargo reduced average query cost by <strong>72%</strong> and P95 latency from 45s to 8s.</p>
+
+        <h2>2. Clustering — Compound Savings with Partitioning</h2>
+        <p>Clustering sorts data within each partition by up to 4 columns. Combined with partitioning, BigQuery can skip data blocks within partitions. Cluster on your most-filtered columns — highest cardinality first.</p>
+
+        <h2>3. Materialized Views — Cache Expensive Aggregations</h2>
+        <p>Materialized views pre-compute and store complex query results. BigQuery automatically refreshes them and uses them transparently — even when queries don't directly reference the view.</p>
+        <pre style="background:var(--bg-white);padding:20px;border-radius:8px;font-size:13px;overflow-x:auto;border:1px solid var(--border-color);"><code>CREATE MATERIALIZED VIEW `project.dataset.daily_revenue_mv`
+PARTITION BY report_date
+AS
+SELECT DATE(order_timestamp) as report_date,
+       product_category,
+       SUM(revenue) as total_revenue,
+       COUNT(DISTINCT user_id) as unique_buyers
+FROM `project.dataset.orders`
+GROUP BY 1, 2;</code></pre>
+
+        <h2>4. Slot Reservations vs On-Demand</h2>
+        <p>For predictable, high-volume workloads, BigQuery reservations (flat-rate pricing) outperform on-demand. At Tech Mahindra/Verizon, migrating to 500-slot reservations reduced costs by <strong>40%</strong> while eliminating billing unpredictability. Use <code>INFORMATION_SCHEMA.JOBS</code> to analyze slot utilization before committing.</p>
+
+        <h2>5. Avoid SELECT * — Always Use Column Pruning</h2>
+        <p>BigQuery charges by bytes scanned. <code>SELECT *</code> on wide tables is one of the most expensive antipatterns. Always explicitly select only needed columns. This alone can reduce scan costs by 60-90% on wide fact tables.</p>
+
+        <h2>6. Use APPROX Functions for Exploration</h2>
+        <p><code>APPROX_COUNT_DISTINCT()</code> is ~2% accurate but uses exponentially less compute than <code>COUNT(DISTINCT)</code>. Use <code>APPROX_TOP_COUNT()</code> and <code>APPROX_QUANTILES()</code> for analytics exploration to dramatically reduce costs.</p>
+
+        <h2>Key Metrics to Track</h2>
+        <ul style="padding-left:24px;line-height:2.2;">
+          <li>Bytes billed per query (target: &lt;1GB for routine queries)</li>
+          <li>Slot utilization rate (target: &gt;70% for reservations)</li>
+          <li>P95 query latency per use case</li>
+          <li>Partition pruning ratio (bytes scanned / total bytes)</li>
+          <li>Materialized view refresh lag</li>
+        </ul>
+
+        <h2>FAQ: BigQuery Optimization</h2>
+        <h3>How do I reduce BigQuery query costs?</h3>
+        <p>Use table partitioning and clustering to limit data scanned, leverage materialized views to cache repeated results, select only needed columns, and monitor slot utilization to right-size reservations.</p>
+
+        <h3>What is the difference between BigQuery partitioning and clustering?</h3>
+        <p>Partitioning divides a table into date-based segments, letting BigQuery skip entire partitions. Clustering sorts data within partitions by specified columns for efficient filtering. Both together provide maximum cost and performance benefits.</p>
+
+        <div style="background:var(--bg-white);border:1px solid var(--border-color);border-radius:12px;padding:24px;margin-top:48px;text-align:center;">
+          <h3 style="margin-bottom:8px;">Need BigQuery Optimization at Enterprise Scale?</h3>
+          <p style="margin-bottom:20px;color:var(--text-muted);">I architect BigQuery solutions that reduce costs and maximize performance for high-volume analytics.</p>
+          <a href="../contact.html" class="btn btn-primary">Contact Sravanthi Maha</a>
+        </div>
+
+        <div style="margin-top:40px;padding-top:32px;border-top:1px solid var(--border-color);">
+          <h3 style="font-size:1rem;margin-bottom:16px;">More Articles</h3>
+          <a href="vertex-ai-ml-pipelines.html" style="display:block;margin-bottom:8px;color:var(--accent);">→ Building Production ML Pipelines with Vertex AI</a>
+          <a href="etl-elt-gcp-best-practices.html" style="display:block;color:var(--accent);">→ ETL vs ELT on Google Cloud Platform: Architecture Patterns for 2025</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="justify-content:center;text-align:center;">
+        <p>&copy; 2025 Sravanthi Maha — Senior GCP Data Engineer. <a href="../index.html">Home</a> · <a href="../blog/">Blog</a> · <a href="../contact.html">Contact</a></p>
+      </div>
+    </div>
+  </footer>
+  <div class="scroll-top" role="button" aria-label="Scroll to top"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 16V4M10 4L4 10M10 4L16 10" stroke="currentColor" stroke-width="1.5"/></svg></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="../js/supabaseClient.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/global.js"></script>
+  <script src="../js/analytics.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

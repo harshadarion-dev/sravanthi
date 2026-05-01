@@ -1,0 +1,28 @@
+# robots.txt — Sravanthi Maha | Senior GCP Data Engineer Portfolio
+# Generated: 2026-05-01
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /test_data.js
+Disallow: /test_data2.js
+Disallow: /test_read.js
+Disallow: /schema.sql
+Disallow: /seed_projects.sql
+
+# Priority crawl paths
+Allow: /index.html
+Allow: /about.html
+Allow: /skills.html
+Allow: /experience.html
+Allow: /projects.html
+Allow: /resume.html
+Allow: /certifications.html
+Allow: /contact.html
+Allow: /blog/
+
+# Sitemaps
+Sitemap: https://sravanthimaha.com/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1

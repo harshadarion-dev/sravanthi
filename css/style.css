@@ -1371,6 +1371,17 @@ textarea.form-input {
   color: var(--text-primary);
 }
 
+.nav-overlay a.btn {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--bg-white);
+  background: var(--accent-black);
+  padding: 14px 32px;
+  margin-top: 24px;
+  border-radius: 40px;
+  border: none;
+}
+
 /* ---- Testimonials ---- */
 .testimonial-card {
   background: var(--bg-white);

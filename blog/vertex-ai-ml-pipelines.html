@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building Production ML Pipelines with Vertex AI — Sravanthi Maha | GCP Data Engineer</title>
+  <meta name="description" content="Real-world patterns for building production ML pipelines with Vertex AI: feature stores, Kubeflow pipelines, model monitoring, and CI/CD for ML at petabyte scale.">
+  <meta name="keywords" content="Vertex AI pipelines, production ML pipeline GCP, Vertex AI feature store, Kubeflow pipeline, ML model monitoring, GCP machine learning engineer, data engineering ML">
+  <meta name="author" content="Sravanthi Maha">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://sravanthimaha.com/blog/vertex-ai-ml-pipelines.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Building Production ML Pipelines with Vertex AI — Sravanthi Maha">
+  <meta property="og:description" content="Feature stores, Kubeflow pipelines, model monitoring, and CI/CD for ML at petabyte scale.">
+  <meta property="og:image" content="https://sravanthimaha.com/assets/images/og-banner.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vertex AI ML Pipelines Guide — Sravanthi Maha">
+  <meta name="twitter:image" content="https://sravanthimaha.com/assets/images/og-banner.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Building Production ML Pipelines with Vertex AI: Lessons from Enterprise Scale","author":{"@type":"Person","name":"Sravanthi Maha","jobTitle":"Senior GCP Data Engineer","url":"https://sravanthimaha.com"},"datePublished":"2026-04-20","dateModified":"2026-05-01","image":"https://sravanthimaha.com/assets/images/og-banner.png","mainEntityOfPage":"https://sravanthimaha.com/blog/vertex-ai-ml-pipelines.html","keywords":["Vertex AI","GCP","ML Pipelines","Machine Learning","Feature Store"]}</script>
+</head>
+<body>
+  <nav class="navbar scrolled" role="navigation">
+    <div class="container">
+      <a href="../index.html" class="nav-logo"><svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="2" y="2" width="24" height="24" rx="4" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(45 14 14)"/><rect x="8" y="8" width="12" height="12" rx="2" fill="currentColor" transform="rotate(45 14 14)"/></svg>Sravanthi</a>
+      <div class="nav-links">
+        <a href="../about.html">About</a><a href="../skills.html">Skills</a>
+        <a href="../experience.html">Experience</a><a href="../projects.html">Projects</a>
+        <a href="../resume.html">Resume</a><a href="../contact.html">Contact</a>
+        <a href="../blog/" class="active">Blog</a>
+      </div>
+      <div class="nav-cta"><a href="../resume.html" class="btn btn-primary">Download Resume</a></div>
+      <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav-overlay">
+    <a href="../index.html">Home</a><a href="../about.html">About</a><a href="../skills.html">Skills</a>
+    <a href="../experience.html">Experience</a><a href="../projects.html">Projects</a>
+    <a href="../resume.html">Resume</a><a href="../contact.html">Contact</a><a href="../blog/">Blog</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="container" style="max-width:800px;">
+      <nav aria-label="Breadcrumb" style="font-size:13px;margin-bottom:16px;color:var(--text-muted);">
+        <a href="../index.html" style="color:var(--text-muted);">Home</a> /
+        <a href="../blog/" style="color:var(--text-muted);">Blog</a> / Vertex AI ML Pipelines
+      </nav>
+      <div style="font-size:12px;color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;">Vertex AI · Machine Learning · GCP</div>
+      <h1 class="reveal">Building Production ML Pipelines with Vertex AI: Lessons from Enterprise Scale</h1>
+      <div style="font-size:13px;color:var(--text-muted);margin-top:20px;">
+        By <a href="../about.html" style="color:var(--text-color);font-weight:600;">Sravanthi Maha</a> · Apr 20, 2026 · 15 min read
+      </div>
+    </div>
+  </section>
+
+  <article class="section" style="padding-top:0;">
+    <div class="container" style="max-width:800px;">
+      <div class="about-text">
+        <p>Moving a machine learning model from notebook to production is one of the hardest problems in data engineering. After implementing ML feature pipelines at <strong>Wells Fargo</strong> — processing 100M+ records daily for real-time anomaly detection — I've developed a battle-tested architecture using <strong>Vertex AI Pipelines, Feature Store, and Model Monitoring</strong>.</p>
+
+        <h2>The Production ML Pipeline Architecture</h2>
+        <p>A production ML pipeline has four distinct phases that must all be automated and observable:</p>
+        <ol style="padding-left:24px;line-height:2.2;">
+          <li><strong>Feature Engineering</strong> — Extract, transform, and serve features consistently across training and serving</li>
+          <li><strong>Training Pipeline</strong> — Orchestrate distributed training with reproducible experiments</li>
+          <li><strong>Evaluation &amp; Validation</strong> — Gate model promotion on performance thresholds</li>
+          <li><strong>Serving &amp; Monitoring</strong> — Deploy with observability and drift detection</li>
+        </ol>
+
+        <h2>1. Vertex AI Feature Store — The Foundation</h2>
+        <p>The biggest ML antipattern is feature inconsistency between training and serving (training-serving skew). Vertex AI Feature Store solves this with a centralized feature registry that serves identical features to both training jobs and online prediction endpoints.</p>
+        <pre style="background:var(--bg-white);padding:20px;border-radius:8px;font-size:13px;overflow-x:auto;border:1px solid var(--border-color);"><code>from google.cloud import aiplatform
+
+# Register feature group
+feature_store = aiplatform.FeatureStore.create(
+    feature_store_id="transactions_fs",
+    online_store_fixed_node_count=3,
+    project=PROJECT_ID,
+    location=REGION
+)
+
+# Ingest features from BigQuery
+entity_type.ingest_from_bq(
+    feature_ids=["amount_30d_avg", "velocity_score", "risk_flag"],
+    bq_source_uri=f"bq://{PROJECT_ID}.features.transaction_features",
+    entity_id_field="user_id",
+    feature_time_field="feature_timestamp"
+)</code></pre>
+
+        <h2>2. Kubeflow Pipeline for Training Orchestration</h2>
+        <p>Vertex AI Pipelines runs Kubeflow-compatible DAGs on managed infrastructure. Each pipeline step runs in an isolated container, ensuring reproducibility and enabling parallel step execution.</p>
+        <pre style="background:var(--bg-white);padding:20px;border-radius:8px;font-size:13px;overflow-x:auto;border:1px solid var(--border-color);"><code>from kfp.v2 import dsl
+from kfp.v2.dsl import component, pipeline
+
+@component(base_image="gcr.io/deeplearning-platform-release/base-cpu")
+def train_model(
+    training_data: Input[Dataset],
+    model_output: Output[Model],
+    n_estimators: int = 100
+):
+    import joblib, pandas as pd
+    from sklearn.ensemble import GradientBoostingClassifier
+    df = pd.read_parquet(training_data.path)
+    X, y = df.drop("label", axis=1), df["label"]
+    model = GradientBoostingClassifier(n_estimators=n_estimators)
+    model.fit(X, y)
+    joblib.dump(model, model_output.path)
+
+@pipeline(name="fraud-detection-pipeline")
+def fraud_pipeline(project: str, region: str):
+    feature_step = extract_features(project=project)
+    train_step = train_model(training_data=feature_step.outputs["dataset"])
+    eval_step = evaluate_model(model=train_step.outputs["model_output"])</code></pre>
+
+        <h2>3. Model Monitoring — Catching Drift Before It Hurts</h2>
+        <p>At Wells Fargo, we set up Vertex AI Model Monitoring with alerts on both <strong>prediction drift</strong> (output distribution shift) and <strong>feature skew</strong> (training vs serving feature distribution). This caught a critical data pipeline issue that would have degraded fraud detection accuracy by 23%.</p>
+        <ul style="padding-left:24px;line-height:2.2;">
+          <li>Set <code>skew_thresholds</code> per feature based on historical variance</li>
+          <li>Monitor prediction drift with Jensen-Shannon divergence</li>
+          <li>Alert on p-value thresholds for statistical significance</li>
+          <li>Auto-retrain triggers based on drift magnitude</li>
+        </ul>
+
+        <h2>4. CI/CD for ML — Automating the Promotion Gate</h2>
+        <p>Never manually promote a model to production. Use Cloud Build + Artifact Registry to automate:</p>
+        <ol style="padding-left:24px;line-height:2.2;">
+          <li>Trigger pipeline on code push to main branch</li>
+          <li>Run training pipeline with holdout evaluation set</li>
+          <li>Compare against champion model on business metrics (AUC, precision@k)</li>
+          <li>Auto-deploy challenger if metrics exceed threshold by &gt;2%</li>
+          <li>Gradual traffic rollout with canary deployment (10% → 50% → 100%)</li>
+        </ol>
+
+        <h2>Key Metrics for Production ML</h2>
+        <ul style="padding-left:24px;line-height:2.2;">
+          <li>Feature freshness latency (target: &lt;5 minutes for online features)</li>
+          <li>Model prediction P99 latency (target: &lt;100ms for online serving)</li>
+          <li>Training-serving skew score per feature (alert threshold: 0.1)</li>
+          <li>Model AUC degradation week-over-week (alert: &gt;0.5% drop)</li>
+        </ul>
+
+        <div style="background:var(--bg-white);border:1px solid var(--border-color);border-radius:12px;padding:24px;margin-top:48px;text-align:center;">
+          <h3 style="margin-bottom:8px;">Need Vertex AI ML Pipelines for Your Team?</h3>
+          <p style="margin-bottom:20px;color:var(--text-muted);">I architect end-to-end ML pipelines that scale reliably from experiment to production.</p>
+          <a href="../contact.html" class="btn btn-primary">Work with Sravanthi Maha</a>
+        </div>
+
+        <div style="margin-top:40px;padding-top:32px;border-top:1px solid var(--border-color);">
+          <h3 style="font-size:1rem;margin-bottom:16px;">More Articles</h3>
+          <a href="bigquery-optimization-guide.html" style="display:block;margin-bottom:8px;color:var(--accent);">→ BigQuery Performance Optimization: A Complete Guide</a>
+          <a href="etl-elt-gcp-best-practices.html" style="display:block;color:var(--accent);">→ ETL vs ELT on Google Cloud Platform: Architecture Patterns for 2025</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="justify-content:center;text-align:center;">
+        <p>&copy; 2025 Sravanthi Maha — Senior GCP Data Engineer. <a href="../index.html">Home</a> · <a href="../blog/">Blog</a> · <a href="../contact.html">Contact</a></p>
+      </div>
+    </div>
+  </footer>
+  <div class="scroll-top" role="button" aria-label="Scroll to top"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 16V4M10 4L4 10M10 4L16 10" stroke="currentColor" stroke-width="1.5"/></svg></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="../js/supabaseClient.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/global.js"></script>
+  <script src="../js/analytics.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

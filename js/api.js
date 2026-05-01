@@ -64,3 +64,31 @@ async function submitContactForm({ name, email, subject, message }) {
   const { error } = await sb.from('contact_messages').insert({ name, email, subject: subject || null, message, status: 'new' });
   if (error) throw error;
 }
+
+// ---------- Blogs ----------
+
+async function fetchBlogs() {
+  const { data, error } = await sb.from('blogs')
+    .select('id, title, slug, excerpt, thumbnail_url, published_at, tags')
+    .eq('published', true)
+    .order('published_at', { ascending: false });
+  if (error) { console.warn('fetchBlogs:', error.message); return []; }
+  return data || [];
+}
+
+async function fetchBlogBySlug(slug) {
+  const { data, error } = await sb.from('blogs')
+    .select('*')
+    .eq('slug', slug)
+    .eq('published', true)
+    .single();
+  if (error) { console.warn('fetchBlogBySlug:', error.message); return null; }
+  return data;
+}
+
+// Expose globally
+window.api = {
+  fetchSettings, fetchProfile, fetchSkills, fetchExperience, 
+  fetchProjects, fetchCertifications, fetchResumeUrl, submitContactForm,
+  fetchBlogs, fetchBlogBySlug
+};

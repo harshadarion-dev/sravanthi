@@ -338,6 +338,10 @@
   .nav-overlay a {
     font-size: 28px;
   }
+
+  .nav-overlay a.btn {
+    font-size: 15px;
+  }
 }
 
 /* ---- Navigation Overlay for Mobile ---- */
