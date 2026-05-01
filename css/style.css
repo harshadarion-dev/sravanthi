@@ -605,7 +605,9 @@ textarea.form-input {
 
 .ticker-track {
   display: flex;
+  flex-wrap: nowrap;
   width: max-content;
+  white-space: nowrap;
   animation: ticker-scroll 30s linear infinite;
 }
 
@@ -615,7 +617,9 @@ textarea.form-input {
 
 .ticker-items {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
+  flex-shrink: 0;
   gap: 0;
   padding-right: 0;
 }
