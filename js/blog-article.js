@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Tag and Headline
     const tagEl = document.getElementById('bTag');
-    if (tagEl) tagEl.textContent = blog.tags ? blog.tags.split(',')[0].trim() : 'Blog';
+    if (tagEl) tagEl.textContent = (blog.tags && typeof blog.tags === 'string') ? blog.tags.split(',')[0].trim() : 'Blog';
     
     const h1El = document.getElementById('bH1');
     if (h1El) {
@@ -57,6 +57,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   } catch (err) {
     console.error('Error loading blog post:', err);
-    document.querySelector('.page-hero').innerHTML = `<div class="container" style="max-width:800px;text-align:center;"><h1>Error Loading Post</h1><p>Something went wrong. Please try again later.</p><a href="index.html" class="btn btn-primary" style="margin-top:20px;">Back to Blog</a></div>`;
+    document.querySelector('.page-hero').innerHTML = `<div class="container" style="max-width:800px;text-align:center;"><h1>Error Loading Post</h1><p>Something went wrong. Please try again later.</p><p style="font-size:12px;opacity:0.8;color:var(--error);margin-top:8px;">(${err.message})</p><a href="index.html" class="btn btn-primary" style="margin-top:20px;">Back to Blog</a></div>`;
   }
 });
