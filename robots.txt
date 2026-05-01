@@ -1,4 +1,4 @@
-# robots.txt — Sravanthi Maha | Senior GCP Data Engineer Portfolio
+﻿# robots.txt — Sravanthi Maha | Senior Data Engineer Portfolio
 # Generated: 2026-05-01
 
 User-agent: *

@@ -1,6 +1,6 @@
-/**
+﻿/**
  * seo.js — Enterprise SEO Engine v2.0
- * Sravanthi Maha | Senior GCP Data Engineer Portfolio
+ * Sravanthi Maha | Senior Data Engineer Portfolio
  *
  * Injects per-page:
  *  - Title + Meta description + Keywords
@@ -14,7 +14,7 @@
 
 // ─── Site-Wide Defaults ──────────────────────────────────────────────────────
 const SEO_DEFAULTS = {
-  siteName:    'Sravanthi Maha — Senior GCP Data Engineer',
+  siteName:    'Sravanthi Maha — Senior Data Engineer',
   siteUrl:     'https://sravanthimaha.com',
   ogImage:     'https://sravanthimaha.com/assets/images/og-banner.png',
   ogImageW:    1200,
@@ -23,33 +23,33 @@ const SEO_DEFAULTS = {
   locale:      'en_US',
   personName:  'Sravanthi Maha',
   alternateName: 'Sravanthi',
-  jobTitle:    'Senior GCP Data Engineer',
+  jobTitle:    'Senior Data Engineer',
   email:       'sravanthi.mahamyjobit@gmail.com',
   phone:       '+16178632387',
   location:    'New York, NY, USA',
-  description: 'Sravanthi Maha is a Senior GCP Data Engineer with 6+ years architecting petabyte-scale ETL/ELT pipelines, BigQuery data warehouses, Vertex AI ML pipelines, and enterprise cloud data infrastructure.',
+  description: 'Sravanthi Maha is a Senior Data Engineer with 6+ years architecting petabyte-scale ETL/ELT pipelines, BigQuery data warehouses, Vertex AI ML pipelines, and enterprise cloud data infrastructure.',
   linkedin:    'https://www.linkedin.com/in/sravanthi-maha',
   github:      'https://github.com/sravanthi-maha',
   profileImage: 'https://sravanthimaha.com/assets/images/hero-portrait.png',
-  keywords:    'Sravanthi Maha, Senior Data Engineer, GCP Data Engineer, BigQuery Engineer, Vertex AI, ETL ELT Pipelines, Cloud Data Architect, DataFlow, Cloud Composer, Terraform, Python Data Engineer, SQL, Apache Spark, Data Engineering Portfolio, New York Data Engineer',
+  keywords:    'Sravanthi Maha, Senior Data Engineer, Data Engineer, BigQuery Engineer, Vertex AI, ETL ELT Pipelines, Cloud Data Architect, DataFlow, Cloud Composer, Terraform, Python Data Engineer, SQL, Apache Spark, Data Engineering Portfolio, New York Data Engineer',
 };
 
 // ─── Per-Page SEO Config ─────────────────────────────────────────────────────
 const PAGE_SEO = {
   'index.html': {
-    title:       'Sravanthi Maha | Senior GCP Data Engineer — BigQuery, ETL Pipelines & Vertex AI',
-    description: 'Sravanthi Maha is a Senior GCP Data Engineer with 6+ years architecting petabyte-scale ETL/ELT pipelines using BigQuery, Dataflow, Vertex AI & Cloud Composer.',
+    title:       'Sravanthi Maha | Senior Data Engineer — BigQuery, ETL Pipelines & Vertex AI',
+    description: 'Sravanthi Maha is a Senior Data Engineer with 6+ years architecting petabyte-scale ETL/ELT pipelines using BigQuery, Dataflow, Vertex AI & Cloud Composer.',
     pageType:    'WebPage',
     breadcrumbs: [{ name: 'Home', url: '/' }],
     faqs: [
-      { q: 'What does Sravanthi Maha specialize in?', a: 'Sravanthi Maha specializes in GCP data engineering — designing petabyte-scale ETL/ELT pipelines, BigQuery data warehouses, Vertex AI ML feature pipelines, and enterprise cloud data infrastructure using Python, SQL, Dataflow, Pub/Sub, and Terraform.' },
+      { q: 'What does Sravanthi Maha specialize in?', a: 'Sravanthi Maha specializes in Data Engineering — designing petabyte-scale ETL/ELT pipelines, BigQuery data warehouses, Vertex AI ML feature pipelines, and enterprise cloud data infrastructure using Python, SQL, Dataflow, Pub/Sub, and Terraform.' },
       { q: 'How many years of data engineering experience does Sravanthi have?', a: 'Sravanthi Maha has 6+ years of enterprise data engineering experience working with companies like Wells Fargo, Amazon, and Tech Mahindra/Verizon.' },
       { q: 'Is Sravanthi Maha available for hire?', a: 'Yes — Sravanthi Maha is open to Senior Data Engineer and Cloud Data Architect roles. Contact via the website for inquiries.' },
     ],
   },
   'about.html': {
-    title:       'About Sravanthi Maha — GCP Data Engineer & Cloud Data Architect | New York',
-    description: 'Meet Sravanthi Maha, a GCP Data Engineer & Cloud Data Architect based in New York with expertise in BigQuery, Vertex AI, ETL automation, and enterprise analytics at petabyte scale.',
+    title:       'About Sravanthi Maha — Data Engineer & Cloud Data Architect | New York',
+    description: 'Meet Sravanthi Maha, a Data Engineer & Cloud Data Architect based in New York with expertise in BigQuery, Vertex AI, ETL automation, and enterprise analytics at petabyte scale.',
     pageType:    'AboutPage',
     breadcrumbs: [{ name: 'Home', url: '/' }, { name: 'About', url: '/about.html' }],
     faqs: [
@@ -59,7 +59,7 @@ const PAGE_SEO = {
   },
   'skills.html': {
     title:       'Technical Skills — Sravanthi Maha | BigQuery, Dataflow, Vertex AI, Python, Terraform',
-    description: 'Explore Sravanthi Maha\'s GCP data engineering skills: BigQuery, Dataflow, Pub/Sub, Cloud Composer, Vertex AI, Python, SQL, Terraform, Apache Spark, Kafka & more.',
+    description: 'Explore Sravanthi Maha\'s Data Engineering skills: BigQuery, Dataflow, Pub/Sub, Cloud Composer, Vertex AI, Python, SQL, Terraform, Apache Spark, Kafka & more.',
     pageType:    'WebPage',
     breadcrumbs: [{ name: 'Home', url: '/' }, { name: 'Skills', url: '/skills.html' }],
     faqs: [
@@ -80,8 +80,8 @@ const PAGE_SEO = {
     breadcrumbs: [{ name: 'Home', url: '/' }, { name: 'Projects', url: '/projects.html' }],
   },
   'resume.html': {
-    title:       'Resume — Sravanthi Maha | Senior GCP Data Engineer | Download CV',
-    description: 'Download Sravanthi Maha\'s resume. 6+ years as a GCP Data Engineer — BigQuery, Dataflow, Python, SQL, Vertex AI, Cloud Composer, Terraform. Available for Senior Data Engineer roles.',
+    title:       'Resume — Sravanthi Maha | Senior Data Engineer | Download CV',
+    description: 'Download Sravanthi Maha\'s resume. 6+ years as a Data Engineer — BigQuery, Dataflow, Python, SQL, Vertex AI, Cloud Composer, Terraform. Available for Senior Data Engineer roles.',
     pageType:    'WebPage',
     breadcrumbs: [{ name: 'Home', url: '/' }, { name: 'Resume', url: '/resume.html' }],
   },
