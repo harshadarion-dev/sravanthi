@@ -601,12 +601,11 @@ textarea.form-input {
   background: var(--bg-white);
   padding: 14px 0;
   user-select: none;
+  white-space: nowrap;
 }
 
 .ticker-track {
-  display: flex;
-  flex-wrap: nowrap;
-  width: max-content;
+  display: inline-block;
   white-space: nowrap;
   animation: ticker-scroll 30s linear infinite;
 }
@@ -616,10 +615,8 @@ textarea.form-input {
 }
 
 .ticker-items {
-  display: flex;
-  flex-wrap: nowrap;
+  display: inline-flex;
   align-items: center;
-  flex-shrink: 0;
   gap: 0;
   padding-right: 0;
 }
